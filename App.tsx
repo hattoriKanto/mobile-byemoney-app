@@ -1,12 +1,15 @@
-import {Text, useColorScheme, View} from 'react-native';
+import React from 'react';
+import {NavigationContainer} from '@react-navigation/native';
+import {useColorScheme} from 'react-native';
+import {RootStack} from './src/navigation';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
 
   return (
-    <View>
-      <Text>Hello world 234</Text>
-    </View>
+    <NavigationContainer>
+      <RootStack />
+    </NavigationContainer>
   );
 };
 
