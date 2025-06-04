@@ -1,14 +1,15 @@
 import {StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  header: {
+  loaderContainer: {
     flex: 1,
-    gap: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 
-  footer: {
-    marginTop: 10,
-    gap: 10,
+  loader: {
+    width: 50,
+    height: 50,
   },
 });
 

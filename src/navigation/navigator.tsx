@@ -1,14 +1,11 @@
+import {useEffect, useState} from 'react';
 import {
   createNativeStackNavigator,
   NativeStackNavigationOptions,
 } from '@react-navigation/native-stack';
-import {
-  HomeScreen,
-  LogInScreen,
-  SighUpScreen,
-  VerificationScreen,
-} from '../screens';
+import {HomeScreen, LoadingScreen, LogInScreen, SighUpScreen} from '../screens';
 import {NAVIGATION_KEYS} from '../types';
+import {supabase} from '../libs';
 
 const Stack = createNativeStackNavigator();
 
@@ -17,8 +14,29 @@ const options: NativeStackNavigationOptions = {
 };
 
 export const RootStack = () => {
+  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+
+  useEffect(() => {
+    const checkSession = async () => {
+      const {
+        data: {session},
+      } = await supabase.auth.getSession();
+      setIsAuth(!!session);
+    };
+
+    checkSession();
+  }, []);
+
+  const initialRouteName = isAuth
+    ? NAVIGATION_KEYS.HOME
+    : NAVIGATION_KEYS.LOG_IN;
+
+  if (isAuth === null) {
+    return <LoadingScreen />;
+  }
+
   return (
-    <Stack.Navigator initialRouteName={NAVIGATION_KEYS.LOG_IN}>
+    <Stack.Navigator initialRouteName={initialRouteName}>
       <Stack.Screen
         name={NAVIGATION_KEYS.LOG_IN}
         component={LogInScreen}
@@ -27,11 +45,6 @@ export const RootStack = () => {
       <Stack.Screen
         name={NAVIGATION_KEYS.SIGN_UP}
         component={SighUpScreen}
-        options={options}
-      />
-      <Stack.Screen
-        name={NAVIGATION_KEYS.VERIFICATION}
-        component={VerificationScreen}
         options={options}
       />
       <Stack.Screen

@@ -4,14 +4,12 @@ export enum NAVIGATION_KEYS {
   LOG_IN = 'Log In',
   SIGN_UP = 'Sign Up',
   HOME = 'Home',
-  VERIFICATION = 'Verification',
 }
 
-type RootStackParamList = {
+export type RootStackParamList = {
   [NAVIGATION_KEYS.LOG_IN]: undefined;
   [NAVIGATION_KEYS.SIGN_UP]: undefined;
   [NAVIGATION_KEYS.HOME]: undefined;
-  [NAVIGATION_KEYS.VERIFICATION]: undefined;
 };
 
 export type ScreenProps = {

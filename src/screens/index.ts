@@ -1,4 +1,4 @@
 export * from './login';
 export * from './signup';
 export * from './home';
-export * from './verification';
+export * from './loading';
