@@ -28,14 +28,11 @@ export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
   const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
 
-    const {success, response} = await handleUserLogIn(data);
-    const {error} = response;
-
-    console.log(error);
+    const {success, message, error} = await handleUserLogIn(data);
 
     if (success) {
       Toast.show({
-        text1: 'Log In Successfully!',
+        text1: message,
         type: 'success',
       });
       navigation.navigate(NAVIGATION_KEYS.HOME);

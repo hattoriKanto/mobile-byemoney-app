@@ -1,6 +1,7 @@
-import {AuthResponse, AuthTokenResponsePassword} from '@supabase/supabase-js';
+import {AuthError} from '@supabase/supabase-js';
 
 export type ApiResponse = {
   success: boolean;
-  response: AuthTokenResponsePassword | AuthResponse;
+  message?: string;
+  error?: AuthError | null;
 };
