@@ -65,8 +65,9 @@ export const SighUpScreen: React.FC<ScreenProps> = ({navigation}) => {
       <Form methods={methods}>
         <FormHeader>
           <Logo />
-          {isLoading && <Loader />}
-          {!isLoading && (
+          {isLoading ? (
+            <Loader />
+          ) : (
             <>
               <Input
                 control={methods.control}

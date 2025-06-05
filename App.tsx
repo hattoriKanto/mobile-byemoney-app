@@ -24,7 +24,7 @@ const App = () => {
         });
 
         if (data.session) {
-          navigate(NAVIGATION_KEYS.HOME);
+          navigate(NAVIGATION_KEYS.BOTTOM_TABS);
         } else {
           console.error('Still no session', error);
         }
