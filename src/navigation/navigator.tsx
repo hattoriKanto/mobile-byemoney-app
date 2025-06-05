@@ -1,16 +1,47 @@
 import {useEffect, useState} from 'react';
+import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  createNativeStackNavigator,
-  NativeStackNavigationOptions,
-} from '@react-navigation/native-stack';
-import {HomeScreen, LoadingScreen, LogInScreen, SighUpScreen} from '../screens';
+  CreateExpenseScreen,
+  ExpensesScreen,
+  LoadingScreen,
+  LogInScreen,
+  ProfileScreen,
+  SighUpScreen,
+} from '../screens';
 import {NAVIGATION_KEYS} from '../types';
 import {supabase} from '../libs';
+import {BottomNavigationContainer} from '../components';
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
-const options: NativeStackNavigationOptions = {
+const options = {
   headerShown: false,
+};
+
+const BottomStack = () => {
+  return (
+    <Tab.Navigator
+      initialRouteName={NAVIGATION_KEYS.EXPENSES}
+      tabBar={props => <BottomNavigationContainer {...props} />}>
+      <Tab.Screen
+        name={NAVIGATION_KEYS.EXPENSES}
+        component={ExpensesScreen}
+        options={options}
+      />
+      <Tab.Screen
+        name={NAVIGATION_KEYS.CREATE_EXPENSE}
+        component={CreateExpenseScreen}
+        options={options}
+      />
+      <Tab.Screen
+        name={NAVIGATION_KEYS.PROFILE}
+        component={ProfileScreen}
+        options={options}
+      />
+    </Tab.Navigator>
+  );
 };
 
 export const RootStack = () => {
@@ -28,7 +59,7 @@ export const RootStack = () => {
   }, []);
 
   const initialRouteName = isAuth
-    ? NAVIGATION_KEYS.HOME
+    ? NAVIGATION_KEYS.BOTTOM_TABS
     : NAVIGATION_KEYS.LOG_IN;
 
   if (isAuth === null) {
@@ -48,8 +79,8 @@ export const RootStack = () => {
         options={options}
       />
       <Stack.Screen
-        name={NAVIGATION_KEYS.HOME}
-        component={HomeScreen}
+        name={NAVIGATION_KEYS.BOTTOM_TABS}
+        component={BottomStack}
         options={options}
       />
     </Stack.Navigator>

@@ -33,7 +33,7 @@ export const SighUpScreen: React.FC<ScreenProps> = ({navigation}) => {
 
     if (success) {
       if (message === TOAST_MESSAGES.signIn.success) {
-        navigation.navigate(NAVIGATION_KEYS.HOME);
+        navigation.navigate(NAVIGATION_KEYS.BOTTOM_TABS);
       }
 
       Toast.show({
@@ -45,6 +45,12 @@ export const SighUpScreen: React.FC<ScreenProps> = ({navigation}) => {
         text1: error?.message,
         type: 'error',
       });
+
+      if (error?.code === 'invalid_credentials') {
+        methods.setError('email', {message: error?.message});
+        methods.setError('password', {message: error?.message});
+        methods.setError('confirmPassword', {message: error?.message});
+      }
     }
 
     setIsLoading(false);

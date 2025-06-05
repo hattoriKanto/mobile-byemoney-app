@@ -35,7 +35,7 @@ export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
         text1: message,
         type: 'success',
       });
-      navigation.navigate(NAVIGATION_KEYS.HOME);
+      navigation.navigate(NAVIGATION_KEYS.BOTTOM_TABS);
     } else {
       Toast.show({
         text1: error?.message,

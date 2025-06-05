@@ -1,10 +1,10 @@
 import {Text} from 'react-native';
 import {AppContainer} from '../../ui';
 
-export const HomeScreen = () => {
+export const CreateExpenseScreen = () => {
   return (
     <AppContainer>
-      <Text>Home</Text>
+      <Text>Create</Text>
     </AppContainer>
   );
 };
