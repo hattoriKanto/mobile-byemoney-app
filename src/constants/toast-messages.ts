@@ -8,4 +8,10 @@ export const TOAST_MESSAGES = {
   logIn: {
     success: 'Successfully login!',
   },
+  session: {
+    expired: 'Session expired. Please, Log In again.',
+  },
+  expense: {
+    success: 'Expense created!',
+  },
 };

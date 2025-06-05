@@ -1,7 +1,7 @@
-import {AuthError} from '@supabase/supabase-js';
+import {AuthError, PostgrestError} from '@supabase/supabase-js';
 
 export type ApiResponse = {
   success: boolean;
   message?: string;
-  error?: AuthError | null;
+  error?: AuthError | PostgrestError | null;
 };
