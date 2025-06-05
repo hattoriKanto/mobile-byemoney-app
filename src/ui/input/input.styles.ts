@@ -50,6 +50,8 @@ const styles = StyleSheet.create({
     height: 56,
     width: '100%',
 
+    justifyContent: 'center',
+
     borderRadius: 10,
     borderWidth: 1,
     borderColor: COLORS.GREY,
@@ -59,6 +61,25 @@ const styles = StyleSheet.create({
 
   inputActive: {
     borderColor: COLORS.YELLOW,
+  },
+
+  dateInput: {
+    padding: 10,
+    marginBottom: 6,
+    height: 56,
+
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+
+    borderRadius: 10,
+    borderWidth: 1,
+    borderColor: COLORS.GREY,
+  },
+
+  dateText: {
+    fontSize: 16,
+    flex: 1,
   },
 
   errorInput: {

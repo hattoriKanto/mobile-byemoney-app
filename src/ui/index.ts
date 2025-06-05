@@ -6,3 +6,4 @@ export * from './logo';
 export * from './form-footer-text';
 export * from './loader';
 export * from './toaster';
+export * from './title';

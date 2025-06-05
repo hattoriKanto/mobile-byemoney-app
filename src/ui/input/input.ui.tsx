@@ -1,12 +1,17 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import {InputProps} from '../../types';
-import {LoginSchema, SignUpSchema} from '../../validators';
+import {CreateExpenseSchema, LoginSchema, SignUpSchema} from '../../validators';
 import {Controller} from 'react-hook-form';
 import {InputError} from './input-error.ui';
 import styles from './input.styles';
 
-export const Input = <T extends LoginSchema | SignUpSchema>({
+export const Input = <
+  T extends
+    | LoginSchema
+    | SignUpSchema
+    | Omit<CreateExpenseSchema, 'date' | 'amount'>,
+>({
   control,
   label,
   name,
