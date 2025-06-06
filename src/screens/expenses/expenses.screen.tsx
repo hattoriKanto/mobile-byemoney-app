@@ -1,20 +1,27 @@
-import React, {useCallback, useState} from 'react';
+import React, {useCallback, useEffect, useState} from 'react';
 import {View} from 'react-native';
 import {useFocusEffect} from '@react-navigation/native';
-import {AppContainer, Logo, TextButton, Title} from '../../ui';
-import {ExpenseEntity, NAVIGATION_KEYS, ScreenProps} from '../../types';
-import {ExpensesList} from '../../components';
+import {AppContainer, Logo, Title} from '../../ui';
+import {
+  NAVIGATION_KEYS,
+  ScreenProps,
+  SortableExpenseColumns,
+} from '../../types';
+import {ExpensesList, ExpensesSort} from '../../components';
 import {TOAST_MESSAGES} from '../../constants';
 import {getExpensesByUserId, getValidUser} from '../../api';
 import {showToast} from '../../utils';
-import {useAuthStore} from '../../stores';
+import {useAuthStore, useExpensesStore} from '../../stores';
 
 export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
   const {setIsAuth} = useAuthStore();
-  const [expenses, setExpenses] = useState<ExpenseEntity[]>([]);
+  const {setExpenses, isAscending, orderBy} = useExpensesStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const fetchExpenses = async () => {
+  const fetchExpenses = async (
+    column?: SortableExpenseColumns,
+    isAscending?: boolean,
+  ) => {
     setIsLoading(true);
 
     const {success: userSuccess, data: user} = await getValidUser();
@@ -27,7 +34,8 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
       return;
     }
 
-    const result = (await getExpensesByUserId(user.id)).data;
+    const result = (await getExpensesByUserId(user.id, column, isAscending))
+      .data;
 
     if (!result) {
       setExpenses([]);
@@ -41,22 +49,22 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
 
   useFocusEffect(
     useCallback(() => {
-      fetchExpenses();
+      fetchExpenses(orderBy, isAscending);
       return () => setExpenses([]);
-    }, []),
+    }, [orderBy, isAscending]),
   );
+
+  useEffect(() => {
+    fetchExpenses(orderBy, isAscending);
+  }, [orderBy, isAscending]);
 
   return (
     <AppContainer>
       <View style={{flex: 1}}>
         <Logo />
         <Title>Your Expenses</Title>
-        <ExpensesList
-          expenses={expenses}
-          setExpenses={setExpenses}
-          fetchExpenses={fetchExpenses}
-          isLoading={isLoading}
-        />
+        <ExpensesSort />
+        <ExpensesList fetchExpenses={fetchExpenses} isLoading={isLoading} />
       </View>
     </AppContainer>
   );

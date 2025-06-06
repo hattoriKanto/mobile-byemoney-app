@@ -1,38 +1,36 @@
-import React, {useEffect, useState} from 'react';
+import React, {useState} from 'react';
 import {FlatList, RefreshControl, Text, View} from 'react-native';
-import {ExpenseEntity} from '../../types';
 import {Loader} from '../../ui';
 import {COLORS} from '../../constants';
 import {ExpenseItem} from '..';
 import styles from './expenses-list.styles';
+import {useExpensesStore} from '../../stores';
+import {SortableExpenseColumns} from '../../types';
 
-type ExpensesProps = {
-  expenses: ExpenseEntity[];
-  fetchExpenses: () => Promise<void>;
+type ExpensesListProps = {
+  fetchExpenses: (
+    column?: SortableExpenseColumns,
+    isAscending?: boolean,
+  ) => Promise<void>;
   isLoading: boolean;
 };
 
-export const ExpensesList: React.FC<ExpensesProps> = ({
+export const ExpensesList: React.FC<ExpensesListProps> = ({
   fetchExpenses,
-  expenses,
   isLoading,
 }) => {
+  const {expenses, setExpenses, isAscending, orderBy} = useExpensesStore();
   const [refreshing, setRefreshing] = useState<boolean>(false);
 
   const onRefresh = async () => {
+    setExpenses([]);
     setRefreshing(true);
-    await fetchExpenses();
+    await fetchExpenses(orderBy, isAscending);
     setRefreshing(false);
   };
 
-  useEffect(() => {
-    fetchExpenses();
-  }, []);
-
   return (
     <View style={styles.contentContainer}>
-      {/* <CustomTextInput placeholder="Enter product name" /> */}
-      {/* <SortButtons refetch={refetch} /> */}
       <FlatList
         bounces={false}
         overScrollMode="never"
@@ -44,7 +42,6 @@ export const ExpensesList: React.FC<ExpensesProps> = ({
         renderItem={itemData => (
           <ExpenseItem expense={itemData.item} fetchExpenses={fetchExpenses} />
         )}
-        // onEndReached={handleReachEnd}
         ListFooterComponent={() => isLoading && <Loader />}
         refreshControl={
           <RefreshControl

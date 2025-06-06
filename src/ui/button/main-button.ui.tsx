@@ -4,7 +4,7 @@ import styles from './button.styles';
 
 type MainButtonProps = {
   children: React.ReactNode;
-  onPress: (e?: React.BaseSyntheticEvent) => Promise<void>;
+  onPress: (e?: React.BaseSyntheticEvent) => Promise<void> | void;
 };
 
 export const MainButton: React.FC<MainButtonProps> = ({children, onPress}) => {

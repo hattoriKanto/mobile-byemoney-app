@@ -1,11 +1,11 @@
 import {create} from 'zustand';
 
 type AuthStore = {
-  isAuth: boolean;
+  isAuth: boolean | null;
   setIsAuth: (status: boolean) => void;
 };
 
 export const useAuthStore = create<AuthStore>()(set => ({
-  isAuth: false,
+  isAuth: null,
   setIsAuth: status => set({isAuth: status}),
 }));

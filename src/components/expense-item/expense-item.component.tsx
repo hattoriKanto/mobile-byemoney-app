@@ -1,10 +1,16 @@
 import React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-import Toast from 'react-native-toast-message';
-import {ExpenseEntity, NAVIGATION_KEYS} from '../../types';
-import {getStringifyDate} from '../../utils';
-import {deleteExpense} from '../../api';
-import {supabase} from '../../libs';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {
+  ExpenseEntity,
+  NAVIGATION_KEYS,
+  RootStackParamList,
+  SortableExpenseColumns,
+} from '../../types';
+import {getStringifyDate, showToast} from '../../utils';
+import {deleteExpense, getValidUser} from '../../api';
+import {useAuthStore, useExpensesStore} from '../../stores';
 import {COLORS, TOAST_MESSAGES} from '../../constants';
 import styles from './expense-item.styles';
 
@@ -13,37 +19,41 @@ import EditIcon from '../../assets/edit.svg';
 
 type ExpenseItemProps = {
   expense: ExpenseEntity;
-  fetchExpenses: () => Promise<void>;
+  fetchExpenses: (
+    column?: SortableExpenseColumns,
+    isAscending?: boolean,
+  ) => Promise<void>;
 };
 
 export const ExpenseItem: React.FC<ExpenseItemProps> = ({
   expense,
   fetchExpenses,
 }) => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+  const {setIsAuth} = useAuthStore();
+  const {isAscending, orderBy} = useExpensesStore();
   const {amount, category, date, title, id} = expense;
   const stringifyDate = getStringifyDate(new Date(date));
 
   const onDeletePress = async () => {
-    const userId = (await supabase.auth.getUser()).data.user?.id;
-    if (!userId) {
-      Toast.show({type: 'error', text1: TOAST_MESSAGES.session.expired});
+    const {success: userSuccess, data: user} = await getValidUser();
 
-      // navigation.navigate(NAVIGATION_KEYS.LOG_IN);
+    if (!userSuccess || !user) {
+      showToast('error', TOAST_MESSAGES.session.expired);
+      setIsAuth(false);
+      navigation.navigate(NAVIGATION_KEYS.LOG_IN);
       return;
     }
 
-    const {success, message} = await deleteExpense(userId, id);
-
-    if (success) {
-      Toast.show({
-        type: 'success',
-        text1: TOAST_MESSAGES.expense.success_delete,
-      });
-    } else {
-      Toast.show({type: 'error', text1: message});
+    const {success, message} = await deleteExpense(user.id, id);
+    if (!success && message) {
+      showToast('error', message);
+      return;
     }
 
-    fetchExpenses();
+    showToast('success', TOAST_MESSAGES.expense.success_delete);
+    fetchExpenses(orderBy, isAscending);
   };
 
   return (

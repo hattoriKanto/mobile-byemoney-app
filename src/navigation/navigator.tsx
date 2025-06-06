@@ -63,7 +63,7 @@ export const RootStack = () => {
     ? NAVIGATION_KEYS.BOTTOM_TABS
     : NAVIGATION_KEYS.LOG_IN;
 
-  if (!isAuth) {
+  if (isAuth === null) {
     return <LoadingScreen />;
   }
 
