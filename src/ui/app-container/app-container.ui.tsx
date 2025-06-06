@@ -1,22 +1,32 @@
 import React from 'react';
-import {Keyboard, TouchableWithoutFeedback} from 'react-native';
+import {Keyboard, TouchableWithoutFeedback, View} from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import styles from './app-container.styles';
 
 type AppContainerProps = {
   children: React.ReactNode;
+  hasKeyboard?: boolean;
 };
 
-export const AppContainer: React.FC<AppContainerProps> = ({children}) => {
+export const AppContainer: React.FC<AppContainerProps> = ({
+  children,
+  hasKeyboard,
+}) => {
   return (
-    <KeyboardAwareScrollView
-      contentContainerStyle={styles.appContainer}
-      alwaysBounceVertical={false}
-      bounces={false}
-      overScrollMode="never">
-      <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-        {children}
-      </TouchableWithoutFeedback>
-    </KeyboardAwareScrollView>
+    <>
+      {!hasKeyboard ? (
+        <View style={styles.appContainer}>{children}</View>
+      ) : (
+        <KeyboardAwareScrollView
+          contentContainerStyle={styles.appContainer}
+          alwaysBounceVertical={false}
+          bounces={false}
+          overScrollMode="never">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+            {children}
+          </TouchableWithoutFeedback>
+        </KeyboardAwareScrollView>
+      )}
+    </>
   );
 };

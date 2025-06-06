@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {useFocusEffect} from '@react-navigation/native';
 import Toast from 'react-native-toast-message';
 import {Form} from '../../components';
 import {createExpenseSchema, CreateExpenseSchema} from '../../validators';
@@ -48,8 +49,14 @@ export const CreateExpenseScreen: React.FC<ScreenProps> = ({navigation}) => {
     }
   };
 
+  useFocusEffect(
+    useCallback(() => {
+      return () => methods.reset();
+    }, []),
+  );
+
   return (
-    <AppContainer>
+    <AppContainer hasKeyboard>
       <View style={{flex: 1, gap: 60}}>
         <Title>New Expense</Title>
         <Form methods={methods}>

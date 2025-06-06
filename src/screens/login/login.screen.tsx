@@ -56,7 +56,7 @@ export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
   };
 
   return (
-    <AppContainer>
+    <AppContainer hasKeyboard>
       <Form methods={methods}>
         <FormHeader>
           <Logo />

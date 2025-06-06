@@ -4,5 +4,5 @@ export type ExpenseEntity = {
   title: string;
   amount: string;
   category: string;
-  date: Date;
+  date: string;
 };
