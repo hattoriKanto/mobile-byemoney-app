@@ -8,6 +8,9 @@ export const TOAST_MESSAGES = {
   logIn: {
     success: 'Successfully login!',
   },
+  logOut: {
+    success: 'Log Out succeseefully',
+  },
   session: {
     expired: 'Session expired. Please, Log In again.',
   },

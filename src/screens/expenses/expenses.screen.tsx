@@ -13,24 +13,6 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
   const [expenses, setExpenses] = useState<ExpenseEntity[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleLogOut = async () => {
-    const {error} = await supabase.auth.signOut();
-    if (error) {
-      console.error(error);
-      return;
-    }
-
-    Toast.show({
-      text1: 'Log Out succeseefully',
-      type: 'success',
-    });
-
-    navigation.reset({
-      index: 0,
-      routes: [{name: NAVIGATION_KEYS.LOG_IN}],
-    });
-  };
-
   const fetchExpenses = async () => {
     setIsLoading(true);
 
@@ -65,9 +47,9 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
       <View style={{flex: 1}}>
         <Logo />
         <Title>Your Expenses</Title>
-        <TextButton onPress={handleLogOut}>Log out</TextButton>
         <ExpensesList
           expenses={expenses}
+          setExpenses={setExpenses}
           fetchExpenses={fetchExpenses}
           isLoading={isLoading}
         />
