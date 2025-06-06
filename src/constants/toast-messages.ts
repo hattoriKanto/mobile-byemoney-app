@@ -13,5 +13,6 @@ export const TOAST_MESSAGES = {
   },
   expense: {
     success: 'Expense created!',
+    success_delete: 'Expense deleted!',
   },
 };
