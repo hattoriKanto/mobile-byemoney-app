@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
-import Toast from 'react-native-toast-message';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
   AppContainer,
@@ -17,6 +16,8 @@ import {NAVIGATION_KEYS, ScreenProps} from '../../types';
 import {Form} from '../../components';
 import {loginSchema, LoginSchema} from '../../validators';
 import {handleUserLogIn} from '../../api';
+import {showToast} from '../../utils';
+import {TOAST_MESSAGES} from '../../constants';
 
 export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -28,25 +29,21 @@ export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
   const onSubmit = async (data: LoginSchema) => {
     setIsLoading(true);
 
-    const {success, message, error} = await handleUserLogIn(data);
+    const {success, error} = await handleUserLogIn(data);
 
-    if (success) {
-      Toast.show({
-        text1: message,
-        type: 'success',
-      });
-      navigation.navigate(NAVIGATION_KEYS.BOTTOM_TABS);
-    } else {
-      Toast.show({
-        text1: error?.message,
-        type: 'error',
-      });
+    if (!success && error) {
+      showToast('error', error.message);
 
-      if (error?.code === 'invalid_credentials') {
-        methods.setError('email', {message: error?.message});
-        methods.setError('password', {message: error?.message});
+      if (error.code === 'invalid_credentials') {
+        methods.setError('email', {message: error.message});
+        methods.setError('password', {message: error.message});
       }
+      setIsLoading(false);
+      return;
     }
+
+    showToast('success', TOAST_MESSAGES.logIn.success);
+    navigation.navigate(NAVIGATION_KEYS.BOTTOM_TABS);
 
     setIsLoading(false);
   };

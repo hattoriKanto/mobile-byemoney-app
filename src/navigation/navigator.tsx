@@ -12,6 +12,7 @@ import {
 import {NAVIGATION_KEYS} from '../types';
 import {supabase} from '../libs';
 import {BottomNavigationContainer} from '../components';
+import {useAuthStore} from '../stores';
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -45,7 +46,7 @@ const BottomStack = () => {
 };
 
 export const RootStack = () => {
-  const [isAuth, setIsAuth] = useState<boolean | null>(null);
+  const {isAuth, setIsAuth} = useAuthStore();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -62,7 +63,7 @@ export const RootStack = () => {
     ? NAVIGATION_KEYS.BOTTOM_TABS
     : NAVIGATION_KEYS.LOG_IN;
 
-  if (isAuth === null) {
+  if (!isAuth) {
     return <LoadingScreen />;
   }
 

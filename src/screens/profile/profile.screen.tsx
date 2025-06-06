@@ -1,30 +1,25 @@
 import React from 'react';
 import {View} from 'react-native';
-import Toast from 'react-native-toast-message';
 import {AppContainer, MainButton, Title} from '../../ui';
 import {logOut} from '../../api';
 import {NAVIGATION_KEYS, ScreenProps} from '../../types';
 import {TOAST_MESSAGES} from '../../constants';
+import {showToast} from '../../utils';
 
 export const ProfileScreen: React.FC<ScreenProps> = ({navigation}) => {
   const handleLogOut = async () => {
-    const {success, message} = await logOut();
+    const {success, error} = await logOut();
 
-    if (success) {
-      Toast.show({
-        text1: TOAST_MESSAGES.logOut.success,
-        type: 'success',
-      });
-      navigation.reset({
-        index: 0,
-        routes: [{name: NAVIGATION_KEYS.LOG_IN}],
-      });
-    } else {
-      Toast.show({
-        text1: message,
-        type: 'error',
-      });
+    if (!success && error) {
+      showToast('error', error.message);
+      return;
     }
+
+    showToast('success', TOAST_MESSAGES.logOut.success);
+    navigation.reset({
+      index: 0,
+      routes: [{name: NAVIGATION_KEYS.LOG_IN}],
+    });
   };
 
   return (

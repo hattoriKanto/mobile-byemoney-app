@@ -1,31 +1,34 @@
 import React, {useCallback, useState} from 'react';
 import {View} from 'react-native';
-import Toast from 'react-native-toast-message';
 import {useFocusEffect} from '@react-navigation/native';
 import {AppContainer, Logo, TextButton, Title} from '../../ui';
-import {supabase} from '../../libs';
 import {ExpenseEntity, NAVIGATION_KEYS, ScreenProps} from '../../types';
 import {ExpensesList} from '../../components';
 import {TOAST_MESSAGES} from '../../constants';
-import {getExpensesByUserId} from '../../api';
+import {getExpensesByUserId, getValidUser} from '../../api';
+import {showToast} from '../../utils';
+import {useAuthStore} from '../../stores';
 
 export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
+  const {setIsAuth} = useAuthStore();
   const [expenses, setExpenses] = useState<ExpenseEntity[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const fetchExpenses = async () => {
     setIsLoading(true);
 
-    const userId = (await supabase.auth.getUser()).data.user?.id;
-    if (!userId) {
-      Toast.show({type: 'error', text1: TOAST_MESSAGES.session.expired});
+    const {success: userSuccess, data: user} = await getValidUser();
 
+    if (!userSuccess || !user) {
+      showToast('error', TOAST_MESSAGES.session.expired);
+      setIsAuth(false);
       navigation.navigate(NAVIGATION_KEYS.LOG_IN);
       setIsLoading(false);
       return;
     }
 
-    const result = (await getExpensesByUserId(userId)).data;
+    const result = (await getExpensesByUserId(user.id)).data;
+
     if (!result) {
       setExpenses([]);
       setIsLoading(false);
@@ -39,6 +42,7 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
   useFocusEffect(
     useCallback(() => {
       fetchExpenses();
+      return () => setExpenses([]);
     }, []),
   );
 

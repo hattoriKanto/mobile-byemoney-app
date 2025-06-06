@@ -3,7 +3,6 @@ import {View} from 'react-native';
 import {useForm} from 'react-hook-form';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useFocusEffect} from '@react-navigation/native';
-import Toast from 'react-native-toast-message';
 import {Form} from '../../components';
 import {createExpenseSchema, CreateExpenseSchema} from '../../validators';
 import {
@@ -17,11 +16,13 @@ import {
   Title,
 } from '../../ui';
 import {NAVIGATION_KEYS, ScreenProps} from '../../types';
-import {supabase} from '../../libs';
-import {createExpense} from '../../api';
+import {createExpense, getValidUser} from '../../api';
 import {TOAST_MESSAGES} from '../../constants';
+import {showToast} from '../../utils';
+import {useAuthStore} from '../../stores';
 
 export const CreateExpenseScreen: React.FC<ScreenProps> = ({navigation}) => {
+  const {setIsAuth} = useAuthStore();
   const methods = useForm<CreateExpenseSchema>({
     resolver: zodResolver(createExpenseSchema),
     mode: 'onChange',
@@ -31,22 +32,24 @@ export const CreateExpenseScreen: React.FC<ScreenProps> = ({navigation}) => {
   });
 
   const onCreatePress = async (data: CreateExpenseSchema) => {
-    const userId = (await supabase.auth.getUser()).data.user?.id;
-    if (!userId) {
-      Toast.show({type: 'error', text1: TOAST_MESSAGES.session.expired});
+    const {success: userSuccess, data: user} = await getValidUser();
 
+    if (!userSuccess || !user) {
+      showToast('error', TOAST_MESSAGES.session.expired);
+      setIsAuth(false);
       navigation.navigate(NAVIGATION_KEYS.LOG_IN);
       return;
     }
 
-    const {success, message} = await createExpense(userId, data);
+    const {success, error} = await createExpense(user.id, data);
 
-    if (success) {
-      Toast.show({type: 'success', text1: TOAST_MESSAGES.expense.success});
-      navigation.navigate(NAVIGATION_KEYS.EXPENSES);
-    } else {
-      Toast.show({type: 'error', text1: message});
+    if (!success && error) {
+      showToast('error', error.message);
+      return;
     }
+
+    showToast('success', TOAST_MESSAGES.expense.success);
+    navigation.navigate(NAVIGATION_KEYS.EXPENSES);
   };
 
   useFocusEffect(

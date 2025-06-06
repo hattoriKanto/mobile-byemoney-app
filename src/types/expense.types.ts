@@ -6,3 +6,8 @@ export type ExpenseEntity = {
   category: string;
   date: string;
 };
+
+export type SortableExpenseColumns = Extract<
+  keyof ExpenseEntity,
+  'date' | 'amount' | 'title' | 'category'
+>;
