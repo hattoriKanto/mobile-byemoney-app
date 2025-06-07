@@ -61,7 +61,6 @@ export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
   return (
     <AppContainer>
       <View style={{flex: 1}}>
-        <Logo />
         <Title>Your Expenses</Title>
         <ExpensesSort />
         <ExpensesList fetchExpenses={fetchExpenses} isLoading={isLoading} />

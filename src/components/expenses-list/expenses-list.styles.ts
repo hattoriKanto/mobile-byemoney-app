@@ -1,4 +1,5 @@
 import {StyleSheet} from 'react-native';
+import {COLORS} from '../../constants';
 
 const styles = StyleSheet.create({
   contentContainer: {
@@ -13,6 +14,7 @@ const styles = StyleSheet.create({
   notFoundText: {
     fontSize: 18,
     textAlign: 'center',
+    color: COLORS.DARK,
   },
 });
 
