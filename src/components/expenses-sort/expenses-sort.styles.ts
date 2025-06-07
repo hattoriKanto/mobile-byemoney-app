@@ -4,13 +4,23 @@ import {COLORS} from '../../constants';
 const styles = StyleSheet.create({
   container: {
     paddingTop: 10,
+    minHeight: 100,
+
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignContent: 'center',
   },
 
   contentContainer: {
     flex: 1,
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
     gap: 8,
+  },
+
+  contentContainerIcon: {
+    gap: 0,
   },
 
   title: {
@@ -20,7 +30,7 @@ const styles = StyleSheet.create({
   },
 
   orderOption: {
-    fontSize: 16,
+    fontSize: 18,
     color: COLORS.DARK,
   },
 

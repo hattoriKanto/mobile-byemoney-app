@@ -26,13 +26,13 @@ export const ExpensesSort = () => {
             <Text style={styles.orderOption}>{orderBy}</Text>
           </TouchableOpacity>
         </View>
-        <View style={styles.contentContainer}>
+        <View style={[styles.contentContainer, styles.contentContainerIcon]}>
           <Text style={styles.title}>Sort by:</Text>
           <TouchableOpacity onPress={() => setIsAscending(!isAscending)}>
             <SortIcon
               style={[isAscending && styles.sortIconReversed]}
               color={COLORS.ORANGE}
-              height={36}
+              height={28}
             />
           </TouchableOpacity>
         </View>
