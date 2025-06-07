@@ -2,12 +2,12 @@ import React, {useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import {Controller} from 'react-hook-form';
 import {InputProps} from '../../types';
-import {CreateExpenseSchema} from '../../validators';
+import {EditExpenseSchema} from '../../validators';
 import {InputError} from './input-error.ui';
 import styles from './input.styles';
 import {isZeroNumberFirst} from '../../utils';
 
-export const NumberInput = <T extends Pick<CreateExpenseSchema, 'amount'>>({
+export const NumberInput = <T extends Pick<EditExpenseSchema, 'amount'>>({
   control,
   label,
   name,

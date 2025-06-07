@@ -56,6 +56,10 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
     fetchExpenses(orderBy, isAscending);
   };
 
+  const onEditPress = () => {
+    navigation.navigate(NAVIGATION_KEYS.EDIT_EXPENSE, {expense});
+  };
+
   return (
     <View style={styles.itemContainer}>
       <View style={styles.itemContent}>
@@ -77,7 +81,7 @@ export const ExpenseItem: React.FC<ExpenseItemProps> = ({
         <TouchableOpacity style={styles.itemButton} onPress={onDeletePress}>
           <TrashIcon color={COLORS.RED} height="100%" width="100%" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.itemButton}>
+        <TouchableOpacity style={styles.itemButton} onPress={onEditPress}>
           <EditIcon color={COLORS.ORANGE} height="100%" width="100%" />
         </TouchableOpacity>
       </View>

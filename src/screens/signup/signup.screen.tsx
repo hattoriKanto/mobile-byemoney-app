@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {useForm} from 'react-hook-form';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {signUpSchema, SignUpSchema} from '../../validators';
 import {Form} from '../../components';
 import {
@@ -14,12 +16,15 @@ import {
   FormFooterText,
   Loader,
 } from '../../ui';
-import {NAVIGATION_KEYS, ScreenProps} from '../../types';
+import {NAVIGATION_KEYS, RootStackParamList} from '../../types';
 import {handleUserSignUp} from '../../api';
 import {TOAST_MESSAGES} from '../../constants';
 import {showToast} from '../../utils';
 
-export const SighUpScreen: React.FC<ScreenProps> = ({navigation}) => {
+export const SighUpScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<SignUpSchema>({
     resolver: zodResolver(signUpSchema),

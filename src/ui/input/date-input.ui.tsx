@@ -3,7 +3,7 @@ import {Controller} from 'react-hook-form';
 import {View, Text, TouchableOpacity} from 'react-native';
 import DatePicker from 'react-native-date-picker';
 import {InputProps} from '../../types';
-import {CreateExpenseSchema} from '../../validators';
+import {EditExpenseSchema} from '../../validators';
 import styles from './input.styles';
 import {InputError} from './input-error.ui';
 import {COLORS} from '../../constants';
@@ -11,7 +11,7 @@ import {getStringifyDate} from '../../utils';
 
 import CalendarIcon from '../../assets/callendar.svg';
 
-export const DateInput = <T extends Pick<CreateExpenseSchema, 'date'>>({
+export const DateInput = <T extends Pick<EditExpenseSchema, 'date'>>({
   control,
   label,
   name,

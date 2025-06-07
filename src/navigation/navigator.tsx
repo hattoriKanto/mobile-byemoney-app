@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {
-  CreateExpenseScreen,
+  EditExpenseScreen,
   ExpensesScreen,
   LoadingScreen,
   LogInScreen,
@@ -32,8 +32,8 @@ const BottomStack = () => {
         options={options}
       />
       <Tab.Screen
-        name={NAVIGATION_KEYS.CREATE_EXPENSE}
-        component={CreateExpenseScreen}
+        name={NAVIGATION_KEYS.EDIT_EXPENSE}
+        component={EditExpenseScreen}
         options={options}
       />
       <Tab.Screen

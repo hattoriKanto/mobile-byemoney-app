@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Text, TextInput, View} from 'react-native';
 import {InputProps} from '../../types';
-import {CreateExpenseSchema, LoginSchema, SignUpSchema} from '../../validators';
+import {EditExpenseSchema, LoginSchema, SignUpSchema} from '../../validators';
 import {Controller} from 'react-hook-form';
 import {InputError} from './input-error.ui';
 import styles from './input.styles';
@@ -10,7 +10,7 @@ export const Input = <
   T extends
     | LoginSchema
     | SignUpSchema
-    | Omit<CreateExpenseSchema, 'date' | 'amount'>,
+    | Omit<EditExpenseSchema, 'date' | 'amount'>,
 >({
   control,
   label,

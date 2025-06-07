@@ -1,13 +1,13 @@
 import {Path, FieldError, Control} from 'react-hook-form';
-import {CreateExpenseSchema, LoginSchema, SignUpSchema} from '../validators';
+import {EditExpenseSchema, LoginSchema, SignUpSchema} from '../validators';
 
 export type InputProps<
   T extends
     | LoginSchema
     | SignUpSchema
-    | Omit<CreateExpenseSchema, 'date' | 'amount'>
-    | Pick<CreateExpenseSchema, 'amount'>
-    | Pick<CreateExpenseSchema, 'date'>,
+    | Omit<EditExpenseSchema, 'date' | 'amount'>
+    | Pick<EditExpenseSchema, 'amount'>
+    | Pick<EditExpenseSchema, 'date'>,
 > = {
   label: string;
   name: Path<T>;

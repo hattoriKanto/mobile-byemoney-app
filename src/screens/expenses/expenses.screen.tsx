@@ -1,10 +1,11 @@
 import React, {useCallback, useEffect, useState} from 'react';
 import {View} from 'react-native';
-import {useFocusEffect} from '@react-navigation/native';
-import {AppContainer, Logo, Title} from '../../ui';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {AppContainer, Title} from '../../ui';
 import {
   NAVIGATION_KEYS,
-  ScreenProps,
+  RootStackParamList,
   SortableExpenseColumns,
 } from '../../types';
 import {ExpensesList, ExpensesSort} from '../../components';
@@ -13,7 +14,10 @@ import {getExpensesByUserId, getValidUser} from '../../api';
 import {showToast} from '../../utils';
 import {useAuthStore, useExpensesStore} from '../../stores';
 
-export const ExpensesScreen: React.FC<ScreenProps> = ({navigation}) => {
+export const ExpensesScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
+
   const {setIsAuth} = useAuthStore();
   const {setExpenses, isAscending, orderBy} = useExpensesStore();
   const [isLoading, setIsLoading] = useState<boolean>(false);

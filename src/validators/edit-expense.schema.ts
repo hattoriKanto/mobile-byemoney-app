@@ -1,7 +1,7 @@
 import {z} from 'zod';
 import {FORM_ERROR_MESSAGES} from '../constants';
 
-export const createExpenseSchema = z.object({
+export const editExpenseSchema = z.object({
   title: z
     .string({required_error: FORM_ERROR_MESSAGES.title.required_error})
     .min(2, FORM_ERROR_MESSAGES.title.min_error)
@@ -31,4 +31,4 @@ export const createExpenseSchema = z.object({
   date: z.date({required_error: FORM_ERROR_MESSAGES.category.required_error}),
 });
 
-export type CreateExpenseSchema = z.infer<typeof createExpenseSchema>;
+export type EditExpenseSchema = z.infer<typeof editExpenseSchema>;

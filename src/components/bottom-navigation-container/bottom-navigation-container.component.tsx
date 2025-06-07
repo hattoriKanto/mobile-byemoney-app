@@ -17,7 +17,7 @@ export const BottomNavigationContainer = ({
       {state.routes.map((route, index) => {
         const isFocused = state.index === index;
         const iconFillColor = isFocused ? COLORS.ORANGE : COLORS.DARK;
-        const isCreate = route.name === NAVIGATION_KEYS.CREATE_EXPENSE;
+        const isCreate = route.name === NAVIGATION_KEYS.EDIT_EXPENSE;
         const isCreateFocused = isFocused && isCreate;
         const createIconFillColor = COLORS.WHITE;
 
@@ -41,7 +41,7 @@ export const BottomNavigationContainer = ({
             {route.name === NAVIGATION_KEYS.EXPENSES && (
               <ExpensesIcon width="100%" height="100%" color={iconFillColor} />
             )}
-            {route.name === NAVIGATION_KEYS.CREATE_EXPENSE && (
+            {route.name === NAVIGATION_KEYS.EDIT_EXPENSE && (
               <CreateIcon
                 width="100%"
                 height="100%"

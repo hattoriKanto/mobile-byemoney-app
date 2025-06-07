@@ -1,5 +1,7 @@
 import React, {useState} from 'react';
 import {useForm} from 'react-hook-form';
+import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {zodResolver} from '@hookform/resolvers/zod';
 import {
   AppContainer,
@@ -12,14 +14,16 @@ import {
   FormFooterText,
   Loader,
 } from '../../ui';
-import {NAVIGATION_KEYS, ScreenProps} from '../../types';
+import {NAVIGATION_KEYS, RootStackParamList} from '../../types';
 import {Form} from '../../components';
 import {loginSchema, LoginSchema} from '../../validators';
 import {handleUserLogIn} from '../../api';
 import {showToast} from '../../utils';
 import {TOAST_MESSAGES} from '../../constants';
 
-export const LogInScreen: React.FC<ScreenProps> = ({navigation}) => {
+export const LogInScreen = () => {
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const methods = useForm<LoginSchema>({
     resolver: zodResolver(loginSchema),
