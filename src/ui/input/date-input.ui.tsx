@@ -41,6 +41,7 @@ export const DateInput = <T extends Pick<CreateExpenseSchema, 'date'>>({
                 mode="date"
                 date={value}
                 open={isOpen}
+                maximumDate={new Date()}
                 onConfirm={date => {
                   setIsOpen(false);
                   onChange(date);
