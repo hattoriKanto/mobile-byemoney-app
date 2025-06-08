@@ -49,6 +49,7 @@ The ByeMoney App is your personal finance sidekick — built with React Native a
 - 🧠 **[Zustand](https://zustand-demo.pmnd.rs/)** - Global state management that’s tiny but mighty.
 - 🗂️ **[React Navigation](https://reactnavigation.org/)** - Stack & tab navigation that's sleek and reliable.
 - 🐣 **[Supabase](https://supabase.com/)** - The open source Firebase alt for auth & data — Postgres powered!
+- 📦 **TypeScript** - For static typing and a better dev experience.
 
 ### 🛠️ Essential Utilities
 
