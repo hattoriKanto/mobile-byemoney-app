@@ -1,97 +1,130 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+<h1 align="center">Welcome to bye-money-app 👋</h1>
+<p>
+  <img alt="Version" src="https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000" />
+  <img src="https://img.shields.io/badge/node-%3E%3D18-blue.svg" />
+  <a href="https://github.com/hattoriKanto/mobile-byemoney-app#readme" target="_blank">
+    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
+  </a>
+  <a href="https://github.com/hattoriKanto/mobile-byemoney-app/blob/master/LICENSE" target="_blank">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
+  </a>
+</p>
 
-# Getting Started
+### 🏠 [Homepage](https://github.com/hattoriKanto/mobile-byemoney-app#readme)
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+## ✍🏼 Description
 
-## Step 1: Start Metro
+The ByeMoney App is your personal finance sidekick — built with React Native and powered by Supabase. Whether you're tracking daily coffee expenses or budgeting like a boss, this app helps you stay in control.
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+### ✨ Features
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+- 🧑‍💻 **User Authentication**
+  Sign Up, Log In, Log Out - securely handled via Supabase Auth with email/password.
+
+- 🛡️ **Email Verification with Deep Linking**
+  Only verified users get in. Supabase + deep links = no shady logins here.
+
+- 📦 **Expense CRUD**
+  Users can create, update, and delete expenses in just a few taps — fast, simple, effective.
+
+- 🛍️ **Smart Sorting**
+  Sort your expenses by date, title, category, or amount. Find what you need in a snap.
+
+- 🔜 **Charts & Insights** _(Coming Soon)_  
+  Visualize your spending habits — see total amounts by month and year with colorful charts.
+
+- 🔜 **Multi-Currency Support** _(Coming Soon)_  
+  Traveling? Future versions will support multiple currencies — global wallet vibes.
+
+## 🔑 Prerequisites
+
+- node >=18
+- npm >=9.0.0
+
+## 🧪 Technologies
+
+- ⚛️ **[React Native](https://reactnative.dev/)** - Write once, run anywhere (iOS & Android) with native performance and JavaScript vibes.
+- 🎣 **[React Hook Form](https://react-hook-form.com/)** - Super smooth form handling with validations that just work.
+- 📦 **[Zod](https://zod.dev/)** - TypeScript-friendly schema validation.
+- 🧠 **[Zustand](https://zustand-demo.pmnd.rs/)** - Global state management that’s tiny but mighty.
+- 🗂️ **[React Navigation](https://reactnavigation.org/)** - Stack & tab navigation that's sleek and reliable.
+- 🐣 **[Supabase](https://supabase.com/)** - The open source Firebase alt for auth & data — Postgres powered!
+
+### 🛠️ Essential Utilities
+
+- 🔐 **[Async Storage](https://react-native-async-storage.github.io/async-storage/)** - Local storage for tokens, settings, and all your secret sauce.
+- 🔧 **[React Native Config](https://github.com/lugg/react-native-config)** - Manage environment variables like a pro.
+- 📆 **[React Native Date Picker](https://github.com/henninghall/react-native-date-picker)** - Sleek date/time picker for all your scheduling needs.
+- 🧼 **[Keyboard Aware Scroll View](https://github.com/APSL/react-native-keyboard-aware-scroll-view)** - Handles keyboard issues like a champ.
+- 🧾 **[Toast Messages](https://github.com/calintamas/react-native-toast-message)** - Feedback for your users, hot and fresh.
+- 📊 **[React Native SVG](https://github.com/software-mansion/react-native-svg)** - Custom icons & charts? Say less.
+- 💫 **[Loader Kit](https://www.npmjs.com/package/react-native-loader-kit)** - Cute loading animations for a smooth UX.
+
+## 💪🏼 Install
 
 ```sh
-# Using npm
-npm start
-
-# OR using Yarn
-yarn start
+npm install
 ```
 
-## Step 2: Build and run your app
+## 💻 Usage
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
-
-### Android
+1. Start the Metro Bundler:
 
 ```sh
-# Using npm
+npm run start
+```
+
+2. Run the App on Your Device or Emulator:
+
+🟢 Android:
+
+```sh
 npm run android
-
-# OR using Yarn
-yarn android
 ```
 
-### iOS
-
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+🍏 iOS:
 
 ```sh
-bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
-bundle exec pod install
-```
-
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
-
-```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
-yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+⚠️ You’ll need either Android Studio (for Android) or Xcode (for iOS) set up — or a real device if you’re feeling brave.
+👉 Need help with that? Check out the official setup guide
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+3. Supabase Setup:
 
-## Step 3: Modify your app
+- Create a project at **[supabase.com](https://supabase.com/)**.
+- Grab your API URL and anon/public key from the project settings.
+- Create a `.env` file in your project root and drop in the following:
 
-Now that you have successfully run the app, let's make changes!
+```sh
+SUPABASE_PUBLIC_KEY=YOUR_PUBLIC_KEY_API
+SUPABASE_URL=YOUR_API_URL
+```
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+## ⚠️ Disclaimer
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+This app has not been tested on iOS. It was developed and tested primarily on Android device.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+## 👦🏼 Author
 
-## Congratulations! :tada:
+👤 **hattoriKanto**
 
-You've successfully run and modified your React Native App. :partying_face:
+- Github: [@hattoriKanto](https://github.com/hattoriKanto)
 
-### Now what?
+## 🤝 Contributing
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/hattoriKanto/mobile-byemoney-app/issues).
 
-# Troubleshooting
+## Show your support
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+Give a ⭐️ if this project helped you!
 
-# Learn More
+## 📝 License
 
-To learn more about React Native, take a look at the following resources:
+Copyright © 2025 [hattoriKanto](https://github.com/hattoriKanto).<br />
+This project is [MIT](https://github.com/hattoriKanto/mobile-byemoney-app/blob/master/LICENSE) licensed.
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
+
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
