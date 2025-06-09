@@ -5,7 +5,7 @@
   <a href="https://github.com/hattoriKanto/mobile-byemoney-app#readme" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
-  <a href="https://github.com/hattoriKanto/mobile-byemoney-app/blob/master/LICENSE" target="_blank">
+  <a href="https://github.com/hattoriKanto/mobile-byemoney-app/blob/master/LICENSE.txt" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
 </p>
