@@ -19,6 +19,7 @@ The ByeMoney App is your personal finance sidekick — built with React Native a
 ### ✨ Features
 
 - 🧑‍💻 **User Authentication**
+
   Sign Up, Log In, Log Out - securely handled via Supabase Auth with email/password.
 
 - 🛡️ **Email Verification with Deep Linking**
