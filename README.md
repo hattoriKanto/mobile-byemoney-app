@@ -23,18 +23,23 @@ The ByeMoney App is your personal finance sidekick — built with React Native a
   Sign Up, Log In, Log Out - securely handled via Supabase Auth with email/password.
 
 - 🛡️ **Email Verification with Deep Linking**
+
   Only verified users get in. Supabase + deep links = no shady logins here.
 
 - 📦 **Expense CRUD**
+
   Users can create, update, and delete expenses in just a few taps — fast, simple, effective.
 
 - 🛍️ **Smart Sorting**
+
   Sort your expenses by date, title, category, or amount. Find what you need in a snap.
 
 - 🔜 **Charts & Insights** _(Coming Soon)_  
+
   Visualize your spending habits — see total amounts by month and year with colorful charts.
 
-- 🔜 **Multi-Currency Support** _(Coming Soon)_  
+- 🔜 **Multi-Currency Support** _(Coming Soon)_
+  
   Traveling? Future versions will support multiple currencies — global wallet vibes.
 
 ## 🔑 Prerequisites
